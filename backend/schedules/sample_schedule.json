@@ -1,0 +1,18 @@
+{
+    "stations": ["A", "B", "C", "D"],
+    "trains": [
+      {
+        "id": "Train1",
+        "route": ["A", "B", "C"],
+        "departure": "10:00",
+        "arrival": "10:30"
+      },
+      {
+        "id": "Train2",
+        "route": ["B", "D"],
+        "departure": "10:15",
+        "arrival": "10:45"
+      }
+    ]
+  }
+  
