@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5">
+    <title>Train Conflict Dashboard</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f8f8f8;
+            padding: 30px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #222;
+            margin-bottom: 20px;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 70%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th {
+            background-color: #ffcccc;
+            padding: 12px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-size: 0.95rem;
+        }
+        tr:nth-child(even) {
+            background-color: #fff5f5;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffeaea;
+        }
+        .no-conflict {
+            background: #e0ffe0;
+            color: #006600;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            width: 60%;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚆 Train Conflict Dashboard</h1>
+
+    {% if conflicts %}
+        <table>
+            <tr>
+                <th>Conflict Type</th>
+                <th>Details</th>
+            </tr>
+            {% for c in conflicts %}
+            <tr>
+                <td>{{ c.type }}</td>
+                <td>
+                    {% if c.type == "TRACK" %}
+                        Track {{ c.track }} → {{ ", ".join(c.trains) }}
+                    {% elif c.type == "PLATFORM" %}
+                        Platform {{ c.platform }} → {{ ", ".join(c.trains) }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="no-conflict">
+            ✅ No conflicts detected. All trains running safely.
+        </div>
+    {% endif %}
+
+</body>
+</html>
